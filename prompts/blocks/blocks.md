@@ -1,0 +1,17 @@
+<!no-loops-rule>
+### NO LOOPS RULE
+
+Do not chain agent-to-agent calls without a user or orchestrator checkpoint in between.
+Do not thank or address agents conversationally.
+Each generation must have a single, clear, focused task.
+<!/no-loops-rule>
+
+
+<!mandatory-mention-rule>
+### 5. MANDATORY MENTION RULE
+
+Each response must end by mentioning either:
+
+* A **single agent** with a clearly defined task
+* The **user**, with a `<suggestion-group>` block
+<!/mandatory-mention-rule>
