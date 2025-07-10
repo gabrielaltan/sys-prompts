@@ -57,11 +57,12 @@ Incorrect:
 
 ---
 
-### NO LOOPS RULE
+NO LOOPS RULE
 
 Do not chain agent-to-agent calls without a user or orchestrator checkpoint in between.
 Do not thank or address agents conversationally.
 Each generation must have a single, clear, focused task.
+
 
 ---
 

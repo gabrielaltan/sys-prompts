@@ -4,7 +4,7 @@ This repository renders modular system prompts using reusable instruction blocks
 
 ## 📂 Structure
 
-- `blocks/`: Reusable instructions (e.g., tone, roles, formats)
+- `blocks/`: Reusable instructions (e.g., tone, roles, formats). In YAML files.
 - `templates/`: Templates using `${block-id}` placeholders
 - `rendered/`: Auto-generated, final prompt outputs
 - `render.py`: Script to generate `rendered/` prompts
@@ -22,10 +22,12 @@ python render.py
 ## 🧩 Format 
 
 ### Blocks
-```md
-<!block-tag>
-...
-<!/block-tag>
+```yaml
+block-tag-one: |
+    ...
+
+block-tag-two: |
+    ...
 ```
 
 ### Block Reference in Templates
