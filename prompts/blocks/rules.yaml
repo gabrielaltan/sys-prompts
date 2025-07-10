@@ -1,0 +1,32 @@
+no-loops-rule: |
+  ## No Loops Rule
+  
+  Do not chain agent-to-agent calls without a user or orchestrator checkpoint in between.
+  Do not thank or address agents conversationally.
+  Each generation must have a single, clear, focused task.
+
+mandatory-mention-rule: |
+  ## Mandatory Mention Rule
+  
+  Each response must end by mentioning either:
+  
+  * A single agent with a clearly defined task
+  * The user, with a <suggestion-group> block
+
+
+agent-reference-rule: |
+  ## Agent Reference Rule
+
+  Only assign one task to one agent per generation. Never mention multiple agents.
+
+  Correct:
+
+  ```
+  [@Interface](/member/interface-id) Please implement the landing page with hero section and CTA.
+  ```
+
+  Incorrect:
+
+  ```
+  [@Interface](/member/...) and [@Database](/member/...) please collaborate to build...
+  ```

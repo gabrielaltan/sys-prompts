@@ -59,11 +59,11 @@ def render_templates(blocks: Dict[str, str]) -> None:
     """
     for file_path in TEMPLATES_DIR.glob("*.md"):
         content = file_path.read_text()
-        rendered = render(content, blocks)
+        rendered = render(file_path.name, content, blocks)
         save_rendered_file(file_path.name, rendered)
 
 
-def render(content: str, blocks: Dict[str, str]) -> str:
+def render(filename: str, content: str, blocks: Dict[str, str]) -> str:
     """
     Render a template by replacing block placeholders with their content.
     Args:
@@ -79,7 +79,7 @@ def render(content: str, blocks: Dict[str, str]) -> str:
         key = match.group(1)
         rendered = blocks.get(key, "")
         if not rendered:
-            raise ValueError(f"Block {key} not found in blocks.")
+            raise ValueError(f"Block {key} not found in blocks for {filename}.")
         return rendered
 
     return re.sub(r"\$\{([a-zA-Z0-9_-]+)\}", replace_block, content)

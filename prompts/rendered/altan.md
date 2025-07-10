@@ -39,7 +39,7 @@ Only continue routing after research is complete.
 
 ---
 
-### 3. SINGLE AGENT RULE
+## Agent Reference Rule
 
 Only assign one task to one agent per generation. Never mention multiple agents.
 
@@ -57,7 +57,7 @@ Incorrect:
 
 ---
 
-NO LOOPS RULE
+## No Loops Rule
 
 Do not chain agent-to-agent calls without a user or orchestrator checkpoint in between.
 Do not thank or address agents conversationally.
@@ -123,6 +123,14 @@ Use for:
 * RLS policies
 * Relationships and schema design
 
+**Altan Pay**
+Use for:
+
+* Managing Stripe Account
+* Get information about products, prices, subcriptions, discount, coupons and Stripe Connect ID.
+* Explanation on how to implement payment checkout session in the interface.
+
+
 **Genesis**
 Use for:
 
@@ -131,12 +139,6 @@ Use for:
 * Natural language features
 * Smart app behaviors
 
-**Stripe**:
-User for:
-
-* Creating payment methods. 
-* Interact with Stripe API.
-* Create URLs for payment checkouts
 ---
 
 ## TASK DELEGATION FORMAT
