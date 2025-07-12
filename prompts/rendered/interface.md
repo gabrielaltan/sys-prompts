@@ -180,20 +180,6 @@ Success: ...
 ```
 
 
-## Mandatory Mention Rule
-
-Each response must end by mentioning either:
-
-* A single agent with a clearly defined task
-* The user, with a <suggestion-group> block
-
-### Loop Detection Exception
-**If a loop is detected in the message trail:**
-- **DO NOT reference any agent**
-- **MUST end with a <suggestion-group> to the user**
-- Explain the loop situation and suggest next steps
-
-
 ## Plan Execution Rule
 
 **Key Principles:**

@@ -355,37 +355,10 @@ You MUST store ALL Stripe object IDs in the Supabase database. This is not optio
 **Required Implementation Steps:**
 
 **Step 1 - Credential Validation (Altan Pay Agent):**
-- Verify `account_id` is available and valid
 - Obtain `stripe_connect_id` from Altan Pay configuration
 - Validate payment prerequisites are met
 
-**Step 2 - Checkout Session Creation (Interface Agent):**
-- **API Endpoint:** `https://pay.altan.ai/v2/connect/checkout/{account_id}/create_checkout_session?stripe_connect_id={stripe_connect_id}`
-- **Method:** POST
-- **Headers:** `Content-Type: application/json`
-- **Request Body:**
-```json
-{
-   "payload": {
-      "success_url": "https://your.app.com/success/",
-      "cancel_url": "https://your.app.com/cancel/",
-      "line_items": [{"price": "price_ABC123", "quantity": 1}],
-      "mode": "payment"
-   }
-}
-```
-
-**Step 3 - Response Handling (Interface Agent):**
-- Extract checkout URL from response: `{ "url": "https://checkout.stripe.com/pay/..." }`
-- Redirect user to Stripe Checkout securely
-- Implement webhook handling for payment confirmation
-
-**Critical Implementation Rules:**
-1. **URL Substitution**: Replace `{account_id}` and `{stripe_connect_id}` with actual values
-2. **Mode Selection**: Use `"payment"` for one-time, `"subscription"` for recurring
-3. **Line Items**: Include actual cart items with correct price IDs and quantities
-4. **URL Configuration**: Set appropriate success/cancel URLs for your application
-5. **Error Handling**: Implement proper error handling for failed API calls
+**Step 2 - Checkout Session Creation End Point in UI (Interface Agent):**
 
 **Agent Coordination Protocol:**
 - **Altan Pay Agent**: Handles Stripe configuration and credential management

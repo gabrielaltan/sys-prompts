@@ -132,6 +132,38 @@ ALWAYS create database table for file storage
 2. Retrieve: GET request to stored media_url for file/preview
 Media Instructions
 Guide users: Click "+" icon → "Add Media" → submit (NEVER recommend attachments)
+
+Payment Integration
+ALWAYS use Altan's payment API for Stripe Connect integration
+Endpoint: POST https://pay.altan.ai/v2/connect/checkout/{account_id}/create_checkout_session?stripe_connect_id={stripe_connect_id}
+Headers: Content-Type: application/json
+Request Body:
+{
+  "payload": {
+    "success_url": "https://your.app.com/success/",
+    "cancel_url": "https://your.app.com/cancel/",
+    "line_items": [
+      {
+        "price": "price_ABC123",
+        "quantity": 1
+      }
+    ],
+    "mode": "payment"
+  }
+}
+
+Response Handling:
+- Extract checkout URL from response: { "url": "https://checkout.stripe.com/pay/..." }
+- Redirect user to Stripe Checkout securely
+- Implement webhook handling for payment confirmation
+
+Critical Implementation Rules:
+1. URL Substitution: Replace {account_id} and {stripe_connect_id} with actual values
+2. Mode Selection: Use "payment" for one-time, "subscription" for recurring
+3. Line Items: Include actual cart items with correct price IDs and quantities
+4. URL Configuration: Set appropriate success/cancel URLs for your application
+5. Error Handling: Implement proper error handling for failed API calls
+   
 PRIORITY ORDER
 1. UI Functionality & Validation
 2. Backend Integration (only when required - most apps don't need auth/database)
@@ -154,8 +186,6 @@ MANDATORY: After all changes, commit and render in UI to refresh and show user t
 NEVER use the "container" inside the classNames, it breaks the application completely!
 
 ${agent-reference-rule}
-
-${mandatory-mention-rule}
 
 ${plan-execution-rule}
 

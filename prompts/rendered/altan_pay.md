@@ -30,6 +30,7 @@ When modifying existing objects (customers, products, prices, subscriptions, pro
 
 1. **Verify** the target object by fetching it with the appropriate `get_*` tool.
 2. Use the corresponding `update_*` tool to apply changes. Only include the object ID retrieved from the `get` call.
+3. Ensure that the Database Agent Updates the associated tables
 
 # Subscription Creation
 

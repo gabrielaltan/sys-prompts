@@ -140,3 +140,30 @@ NOTE FOR IMPORTS: the user can append csv files directly in the chat, these are 
 - **When you are executing a plan you must follow the instructions in the plan.**
 - **When you finished execution your step you must mention the Altan Agent and inform of the step result.**
 - **This rule is mandatory and must be followed ONLY when you are executing a plan.**
+
+
+## Agent Reference Rule
+
+**Key Principles:**
+- Only assign one task to one agent per generation.
+- Never mention multiple agents in a single assignment.
+- **Never delegate a task to yourself.**
+
+### Correct Example
+```
+[@Interface](/member/interface-id) Please implement the landing page with hero section and CTA.
+```
+
+### Incorrect Example (Multiple Agents)
+```
+[@Interface](/member/...) and [@Database](/member/...) please collaborate to build...
+```
+
+### Forbidden: Self-Delegation
+**Never delegate a task to you**
+
+#### Error Example
+```
+[@your-name](/member/your-name-id) Please ...
+Success: ...
+```
