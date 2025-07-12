@@ -33,7 +33,8 @@ def loads_blocks() -> Dict[str, str]:
     blocks = {}
     for file_path in BLOCKS_DIR.glob("*.yaml"):
         try:
-            content = yaml.safe_load(file_path.read_text())
+            # Use yaml.load with SafeLoader to handle aliases properly
+            content = yaml.load(file_path.read_text(), Loader=yaml.SafeLoader)
         except Exception as e:
             raise ValueError(
                 f"Block file {file_path.name} could not be parsed as YAML: {e}"
@@ -43,11 +44,18 @@ def loads_blocks() -> Dict[str, str]:
                 f"Block file {file_path.name} does not contain a dictionary at the top level."
             )
         for k, v in content.items():
-            if not isinstance(k, str) or not isinstance(v, str):
+            if not isinstance(k, str):
                 raise ValueError(
-                    f"Block file {file_path.name} contains non-string key or value: {k}: {v}"
+                    f"Block file {file_path.name} contains non-string key: {k}"
                 )
-        blocks.update(content)
+            if isinstance(v, str):
+                blocks[k] = v
+            elif isinstance(v, list):
+                blocks[k] = "\n\n".join(str(item) for item in v)
+            else:
+                raise ValueError(
+                    f"Block file {file_path.name} contains unsupported value type for key {k}: {type(v)}"
+                )
     return blocks
 
 

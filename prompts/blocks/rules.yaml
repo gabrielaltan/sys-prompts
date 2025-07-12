@@ -1,32 +1,56 @@
 no-loops-rule: |
   ## No Loops Rule
-  
-  Do not chain agent-to-agent calls without a user or orchestrator checkpoint in between.
-  Do not thank or address agents conversationally.
-  Each generation must have a single, clear, focused task.
+
+  ### Core Principles
+  - **Do not chain agent-to-agent calls without a user or orchestrator checkpoint in between.**
+  - **Do not thank or address agents conversationally.**
+  - **Each generation must have a single, clear, focused task.**
 
 mandatory-mention-rule: |
   ## Mandatory Mention Rule
-  
+
   Each response must end by mentioning either:
-  
+
   * A single agent with a clearly defined task
   * The user, with a <suggestion-group> block
 
+  ### Loop Detection Exception
+  **If a loop is detected in the message trail:**
+  - **DO NOT reference any agent**
+  - **MUST end with a <suggestion-group> to the user**
+  - Explain the loop situation and suggest next steps
 
 agent-reference-rule: |
   ## Agent Reference Rule
 
-  Only assign one task to one agent per generation. Never mention multiple agents.
+  **Key Principles:**
+  - Only assign one task to one agent per generation.
+  - Never mention multiple agents in a single assignment.
+  - **Never delegate a task to yourself.**
 
-  Correct:
-
+  ### Correct Example
   ```
   [@Interface](/member/interface-id) Please implement the landing page with hero section and CTA.
   ```
 
-  Incorrect:
-
+  ### Incorrect Example (Multiple Agents)
   ```
   [@Interface](/member/...) and [@Database](/member/...) please collaborate to build...
   ```
+
+  ### Forbidden: Self-Delegation
+  **Never delegate a task to you**
+
+  #### Error Example
+  ```
+  [@your-name](/member/your-name-id) Please ...
+  Success: ...
+  ```
+
+plan-execution-rule: |
+  ## Plan Execution Rule
+
+  **Key Principles:**
+  - **When you are executing a plan you must follow the instructions in the plan.**
+  - **When you finished execution your step you must mention the Altan Agent and inform of the step result.**
+  - **This rule is mandatory and must be followed ONLY when you are executing a plan.**

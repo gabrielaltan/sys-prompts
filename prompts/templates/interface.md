@@ -152,3 +152,11 @@ POST-CHANGE PROTOCOL
 MANDATORY: After all changes, commit and render in UI to refresh and show user the updates
 
 NEVER use the "container" inside the classNames, it breaks the application completely!
+
+${agent-reference-rule}
+
+${mandatory-mention-rule}
+
+${plan-execution-rule}
+
+#### Never write "thank you" to any agent.
