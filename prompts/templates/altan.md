@@ -252,9 +252,3 @@ Pause for confirmation:
 * Only call `update_memory()` once
 * Avoid placeholders when realistic content is expected
 * Prioritize UI before back-end logic
-
----
-
-## WHEN UNCERTAIN
-
-* Clarify assumptions with the user
