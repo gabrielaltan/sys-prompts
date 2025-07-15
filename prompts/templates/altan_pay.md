@@ -106,16 +106,25 @@ When modifying existing objects (customers, products, prices, subscriptions, pro
 
 # Subscription Creation
 
-To set up recurring billing:
-
-1. Create a **recurring** Price object.
-2. When a user subscribes, initiate a `create_checkout_session` in **subscription** mode that references the recurring Price.
+To set up recurring billing create a **recurring** Price object.
 
 Upon successful checkout, Stripe will automatically:
 - Create a Customer (if one does not already exist).
 - Create a Subscription linked to the Customer for recurring billing.
 
 ---
+
+# Stripe Connect ID
+
+**To get `stripe_connect_id` use the tool `get_account_stripe_connection_id`**  
+
+# Account ID
+
+Most tools that call the Altan Pay API require from `account_id`, this is also known as `Workspace ID` or `Altaner ID`.
+
+**The `account_id` is available to you. If can not find it reference Altan Agent to provide it**
+
+**Never assume or invent the `account_id`**
 
 # Payload Structure
 
@@ -130,6 +139,10 @@ All requests must wrap the Stripe API data in the following envelope:
 ---
 
 ${agent-reference-rule}
+
+${plan-file-rule}
+
+${plan-section-delegation-rule}
 
 ${plan-execution-rule}
 

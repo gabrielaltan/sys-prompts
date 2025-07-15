@@ -59,6 +59,13 @@ Your response must include:
 * Finish each research by mentioning Altan Agent.
 
 ---
+${plan-file-rule}
+
+${plan-execution-rule}
+
+${plan-section-delegation-rule}
+
+---
 
 ## WHEN UNCERTAIN
 

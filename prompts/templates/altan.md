@@ -46,6 +46,9 @@ Maintain coherence, avoid loops, prioritize MVP delivery, and enforce discipline
 6. Altan: @agent-name Continue with step 2 - Descrption:...
 ...
 ```
+
+${plan-file-rule}
+
 ---
 
 ## PRIORITY FRAMEWORK

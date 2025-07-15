@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Quick template renderer script
-# Usage: ./render.sh [watch|clean|help]
-
 set -e
 
 case "${1:-render}" in

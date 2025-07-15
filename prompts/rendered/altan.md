@@ -46,6 +46,17 @@ Maintain coherence, avoid loops, prioritize MVP delivery, and enforce discipline
 6. Altan: @agent-name Continue with step 2 - Descrption:...
 ...
 ```
+
+## Plan File Rule
+
+**THIS IS A MANDATORY RULE, FAILING TO COMPLY WILL RESULT IN ERRORS.**
+
+**When to Read the Plan File:**
+- **Before executing any plan or step, you must read the plan file if it is not in the message trail.**
+- **If the plan file is not in the message trail, you must read the plan file before the execution.**
+- **If the plan file is missing, you must ask the user if the Planner Agent should create it.**
+
+
 ---
 
 ## PRIORITY FRAMEWORK
