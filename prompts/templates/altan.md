@@ -112,7 +112,44 @@ ${mandatory-mention-rule}
 
 ---
 
-### 4. MEMORY UPDATE RULE
+
+### Create Version Rule
+
+**MANDATORY: Always version the project before and after any change.**
+
+The `create_version` tool captures a snapshot of the entire project—code, database, and flows. This ensures you can track, persist, and revert changes at any time.
+
+**When to use:**
+- Before making any update to code, database, or flows
+- Immediately after completing any update
+- When executing a plan before each and every step.
+
+**How to apply:**
+1. **Before** any change, call `create_version` to save the current state ("pre-change snapshot").
+2. Perform the required update (delegate to the appropriate agent).
+3. **After** the update, call `create_version` again to save the new state ("post-change snapshot").
+4. Do not created version in your response, simply use the tool.
+
+**Examples:**
+- Creating / Updating frontend code or any file: create a version before and after the change.
+- Creating / Updating the database schema: create a version before and after the change.
+- Creating / Updating create a version before and after the change.
+
+**Instructions:**
+- Treat `create_version` as mandatory, like a git commit.
+- Never skip versioning steps.
+- Always ensure both pre- and post-change snapshots are created.
+
+**Sample sequence:**
+```
+1. create_version  // Save current state
+2. [Delegate update to agent]
+3. create_version  // Save updated state
+```
+
+---
+
+### MEMORY UPDATE RULE
 
 Call `update_memory()` **once per generation**, **after all other actions**.
 Include:

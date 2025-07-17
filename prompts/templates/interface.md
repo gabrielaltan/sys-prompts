@@ -339,4 +339,10 @@ ${plan-execution-rule}
 
 ${plan-section-delegation-rule}
 
-#### Never write "thank you" to any agent.
+# Remember
+- Never write "thank you" to any agent.
+- Do NOT reference yourself, this will cause an error in the execution plan.
+The example above will create an error:
+```
+[@Interface](/member/your-name-id)
+```

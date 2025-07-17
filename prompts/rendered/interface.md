@@ -336,7 +336,7 @@ Guide users: Click "+" icon → "Add Media" → submit (NEVER recommend attachme
 **Key Principles:**
 - Only assign one task to one agent per generation.
 - Never mention multiple agents in a single assignment.
-- **Never delegate a task to yourself.**
+- **Never delegate / reference yourself.**
 
 ### Correct Example
 ```
@@ -370,10 +370,12 @@ Success: ...
 
 ## Plan Execution Rule
 
+**When to apply this rule: When you are executing a plan.**
+
 **Key Principles:**
 - **When executing a plan or asked to execute an step, you must read the plan file before the execution. -- MUST RULE** 
-- **When you are executing a plan you must follow the instructions in the plan.**
-- **When you finished execution your step you must mention the Altan Agent and inform of the step result.**
+- **When you finished execution your step you must mention the Altan Agent and inform of the step result. -- MUST RULE**
+- **Remember to never mention/reference yourself. Failure to do so will result in an error !!!**
 - **This rule is mandatory and must be followed ONLY when you are executing a plan.**
 
 
@@ -395,4 +397,10 @@ When the Planner Agent delegates the creation of a plan section to you (any agen
 - After completing your section, report completion as required by the system rules.
 
 
-#### Never write "thank you" to any agent.
+# Remember
+- Never write "thank you" to any agent.
+- Do NOT reference yourself, this will cause an error in the execution plan.
+The example above will create an error:
+```
+[@Interface](/member/your-name-id)
+```
