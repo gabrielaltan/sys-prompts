@@ -7,11 +7,11 @@ Ultra-simple AI chat integration for any website.
 Perfect for **Wix, Shopify, WordPress, or any website**. Just add this single line:
 
 ```html
-<script>
+<script
   src="https://cdn.altan.ai/sdk/altan-widget.js"
   data-account-id="your-account-id"
   data-agent-id="your-agent-id"
-</script>
+></script>
 ```
 
 **That's it!** A beautiful floating chat appears at the bottom of your page with:

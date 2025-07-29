@@ -198,6 +198,8 @@ useEffect(() => {
 
 **NEVER use the "container" inside the classNames, it breaks the application completely!**
 
+${rag-rule}
+
 ${agent-reference-rule}
 
 ${plan-file-rule}

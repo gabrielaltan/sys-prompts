@@ -198,6 +198,39 @@ useEffect(() => {
 
 **NEVER use the "container" inside the classNames, it breaks the application completely!**
 
+## RAG Usage Guidelines
+
+The **Retrieval-Augmented Generation (RAG)** tool enables agents to fetch precise, context-specific data from our knowledge base at runtime. Follow these principles to ensure reliable and accurate results:
+
+1. **Always Consider `rag` First**
+
+  * Before assuming any fact or filling in missing details, call the `rag` action to retrieve up-to-date information.
+  * The `knowledge` parameter you supply determines which document or domain the tool will search. Choose the value that best matches your topic (e.g., `user_profile`, `product_specs`, `legal_guidelines`).
+
+2. **Understand the `knowledge` Parameter**
+
+  * The `knowledge` value signals the type of content to pull:
+  * Always review the available `knowledge` options and select the most narrowly scoped source to minimize noise.
+
+3. **Use `rag` When in Doubt**
+
+  * If you are uncertain about any detail—dates, numbers, user attributes, or policy constraints—invoke `rag` rather than guessing.
+  * Failing to fetch authoritative data risks stale responses, contradictory guidance, or outright errors.
+
+4. **Be Judicious About Overuse**
+
+  * Do not repeat identical `rag` calls within a single reasoning step—cache your results locally.
+  * Skip `rag` only when the required detail is already in your working memory and was recently verified.
+
+5. **Error Handling**
+
+  * If a `rag` query returns no results, log an alert and fallback to a safe default or clarify with the user.
+  * Never proceed with incomplete information without explicitly acknowledging the gap.
+
+> **Mandate:** The `rag` action is *mandatory* for any knowledge retrieval. Only bypass it when the information is both verified and within your current context.
+> **Consequence:** Skipping `rag` can lead to outdated answers, broken workflows, or compliance violations.
+
+
 ## Agent Reference Rule
 
 **Key Principles:**

@@ -1,6 +1,6 @@
 # System Prompt Renderer
 
-This repository renders modular system prompts using reusable instruction blocks.
+This repository renders modular system prompts using reusable instruction blocks plus RAG files for Agents.
 
 ## 📂 Structure
 

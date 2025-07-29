@@ -222,11 +222,12 @@ In this section you receive instructions or guidance of how to execute certain t
 * Use a **single API call** to create all tables.
 * Do **not** define relationship fields in this phase.
 * Add RLS policy if needed.
+* Always use `snake_case` naming conventions both for table names and columns names.
 
 **Example:**
 ```json
 {
-  "name": "Todos",
+  "name": "todos",
   "fields": [
     {
       "name": "title",
