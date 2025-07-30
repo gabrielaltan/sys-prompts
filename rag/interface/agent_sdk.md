@@ -25,6 +25,20 @@ import { Room } from '@altanlabs/sdk';
 />
 ```
 
+### Compact Mode (Floating Widget)
+
+Shows a floating text field that expands to full chat on click.
+
+```jsx
+<Room
+  mode="compact"
+  ....
+/>
+```
+
+**When to use it:** Use it for projects where the agent is a core element. Like FAQs agents or simple assistants. When in doubt, favor the use compact mode.
+
+
 ## SDK Parameters
 
 | Prop        | Type                  | Required | Description                          |
@@ -65,73 +79,53 @@ If any of these tables are missing you must prompt Altan Agent to orchestrate th
 
 ## Guest Info
 
+Providing `guestInfo` enables chat history. 
+
 ```jsx
+const user = useAuth();
+...
 guestInfo={{
-  external_id: 'user-123',    // Your user ID (enables conversation history)
-  first_name: 'John',         // User's first name
-  last_name: 'Doe',          // User's last name  
-  email: 'john@example.com'   // User's email
+  first_name: user?.first_name || null,    // Your user ID (enables conversation history)
+  last_name: user?.last_name || null,    // User's first name
+  email: user?.email || null,   // User's last name  
+  external_id: user?.id || null   // User's email
 }}
 ```
 
-### When to Use `guestInfo`
-
-Use `guestInfo` **only** when your project depends on user‑specific history or memory. Omit it whenever interactions are truly stateless.
-
-#### ❌ When **Not** to Use `guestInfo`
-
-Stateless assistants handle each session independently. Example scenarios:
-
-* **E‑commerce helpers**
-
-  * Return / exchange policy FAQs
-  * Delivery fee calculators
-  * Product browsing recommendations (e.g. “Show me blue sneakers”)
-* **Generic travel guides**
-
-  * Flight status lookups
-  * Hotel availability inquiries
-  * Local weather updates
-* **One‑off calculators**
-
-  * Currency conversions
-  * Mortgage or loan estimators
-* **SaaS FAQ bots** (RAG‑powered)
-
-  * Onboarding documentation
-  * Troubleshooting guides (“How do I reset my password?”)
-  * API reference lookups
-
-> In these use cases, no past conversation data is required—each query stands on its own.
-
----
-
-#### ✅ When **To** Use `guestInfo`
-
-Provide `guestInfo` when the agent must retrieve or build on previous sessions:
-
-* **Summarization pipelines**
-
-  * Multi‑document reviews (e.g. quarterly reports across months)
-  * Ongoing meeting minutes aggregation
-* **Memory‑driven workflows**
-
-  * User preferences (e.g. saved filters, favorite categories)
-  * Draft management (e.g. blog post drafts or code snippets)
-* **Image‑editing assistants**
-
-  * Iterative photo touch‑ups (e.g. apply filter sequence over time)
-  * Versioned design feedback (e.g. logo iterations)
-* **Learning platforms**
-
-  * Track completed lessons and quiz scores
-  * Personalized study reminders based on past progress
-* **Healthcare or fintech bots**
-
-  * Recall prior symptom logs or transaction histories
-  * Continuously refine advice with cumulative data
-
 > **MUST RULE:** Any feature that relies on history **must** be protected by authentication. If you require chat history, enforce login so `guestInfo.external_id` reliably identifies the user.
+
+> **MUST RULE:** `guestInfo` parameters must be fetch dynamically from the Database.
+
+## Customization
+
+### Agent Mode
+
+| Property               | Type     | Default     | Description                              |
+| ---------------------- | -------- | ----------- | ---------------------------------------- |
+| `tabs`                 | boolean  | `true`      | Show/hide tab navigation                 |
+| `conversation_history` | boolean  | `true`      | Show/hide conversation history           |
+| `members`              | boolean  | `true`      | Show/hide members panel                  |
+| `settings`             | boolean  | `true`      | Show/hide settings panel                 |
+| `theme`                | string   | `undefined` | Theme mode: 'light', 'dark', or 'system' |
+| `title`                | string   | `undefined` | Custom title                             |
+| `description`          | string   | `undefined` | Custom description                       |
+| `voice_enabled`        | boolean  | `true`      | Enable/disable voice functionality       |
+| `suggestions`          | string[] | `[]`        | Predefined message suggestions           |
+
+
+### Compact Mode (Widget Mode)
+
+| Property           | Type    | Default         | Description                                              |
+| ------------------ | ------- | --------------- | -------------------------------------------------------- |
+| `primary_color`    | string  | `#007bff`       | Primary color (hex) for buttons and accents              |
+| `background_color` | string  | `#ffffff`       | Background color (hex) for the widget                    |
+| `background_blur`  | boolean | `true`          | Enable glassmorphism background blur effect              |
+| `position`         | string  | `bottom-center` | Position: 'bottom-right', 'bottom-left', 'bottom-center' |
+| `widget_width`     | number  | `350`           | Widget width in pixels                                   |
+| `room_width`       | number  | `450`           | Room width in pixels when expanded                       |
+| `room_height`      | number  | `600`           | Room height in pixels when expanded                      |
+| `border_radius`    | number  | `16`            | Border radius in pixels for rounded corners              |
+
 
 ## Complete Example
 
