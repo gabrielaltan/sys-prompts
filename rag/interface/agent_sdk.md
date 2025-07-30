@@ -58,9 +58,6 @@ If any of these tables are missing you must prompt Altan Agent to orchestrate th
 
    * Collect from your own user store or prompt the user on first access.
 
-> **Error handling:**
-> If the `projects` or `users` tables don’t exist in your database schema, prompt the Altan Agent to orchestrate their creation before rendering the chat
-
 ## Requirements
 
 - **Agents must be public** for agent mode to work
@@ -76,6 +73,65 @@ guestInfo={{
   email: 'john@example.com'   // User's email
 }}
 ```
+
+### When to Use `guestInfo`
+
+Use `guestInfo` **only** when your project depends on user‑specific history or memory. Omit it whenever interactions are truly stateless.
+
+#### ❌ When **Not** to Use `guestInfo`
+
+Stateless assistants handle each session independently. Example scenarios:
+
+* **E‑commerce helpers**
+
+  * Return / exchange policy FAQs
+  * Delivery fee calculators
+  * Product browsing recommendations (e.g. “Show me blue sneakers”)
+* **Generic travel guides**
+
+  * Flight status lookups
+  * Hotel availability inquiries
+  * Local weather updates
+* **One‑off calculators**
+
+  * Currency conversions
+  * Mortgage or loan estimators
+* **SaaS FAQ bots** (RAG‑powered)
+
+  * Onboarding documentation
+  * Troubleshooting guides (“How do I reset my password?”)
+  * API reference lookups
+
+> In these use cases, no past conversation data is required—each query stands on its own.
+
+---
+
+#### ✅ When **To** Use `guestInfo`
+
+Provide `guestInfo` when the agent must retrieve or build on previous sessions:
+
+* **Summarization pipelines**
+
+  * Multi‑document reviews (e.g. quarterly reports across months)
+  * Ongoing meeting minutes aggregation
+* **Memory‑driven workflows**
+
+  * User preferences (e.g. saved filters, favorite categories)
+  * Draft management (e.g. blog post drafts or code snippets)
+* **Image‑editing assistants**
+
+  * Iterative photo touch‑ups (e.g. apply filter sequence over time)
+  * Versioned design feedback (e.g. logo iterations)
+* **Learning platforms**
+
+  * Track completed lessons and quiz scores
+  * Personalized study reminders based on past progress
+* **Healthcare or fintech bots**
+
+  * Recall prior symptom logs or transaction histories
+  * Continuously refine advice with cumulative data
+
+> **MUST RULE:** Any feature that relies on history **must** be protected by authentication. If you require chat history, enforce login so `guestInfo.external_id` reliably identifies the user.
 
 ## Complete Example
 
