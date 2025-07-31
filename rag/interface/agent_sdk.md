@@ -41,12 +41,12 @@ Shows a floating text field that expands to full chat on click.
 
 ## SDK Parameters
 
-| Prop        | Type                  | Required | Description                          |
-| ----------- | --------------------- | -------- | ------------------------------------ |
+| Prop        | Type      | Required | Description                          |
+| ----------- | --------- | -------- | ------------------------------------ |
 | `mode`      | `"agent"` | ✅        | Chat with agent or join room         |
-| `accountId` | string                | ✅        | Your Altan account ID                |
-| `agentId`   | string                | ✅       | Agent ID (required for agent mode)   |
-| `guestInfo` | object                | ❌        | User info (name, external_id, email) |
+| `accountId` | string    | ✅        | Your Altan account ID                |
+| `agentId`   | string    | ✅        | Agent ID (required for agent mode)   |
+| `guestInfo` | object    | ❌        | User info (name, external_id, email) |
 
 
 If any of these tables are missing you must prompt Altan Agent to orchestrate the creation of the required tables.
@@ -79,22 +79,78 @@ If any of these tables are missing you must prompt Altan Agent to orchestrate th
 
 ## Guest Info
 
-Providing `guestInfo` enables chat history. 
+You control whether history is enabled by supplying `guestInfo`. You must follow these rules exactly when populating it:
+
+### Rules You Must Follow
+
+1. **`external_id` is the primary key for user history.**
+
+   * You must supply `guestInfo.external_id` only if it matches an existing user ID in your `users` table.
+   * If that ID does not exist or you cannot reliably resolve the current session to a user, set it to `null`.
+   * This value is how you load and recover per-user conversation history; it must come from the database.
+
+2. **Never hardcode or fabricate data.**
+
+   * Do not hardcode `first_name`, `last_name`, `email`, or `external_id` (except `null`).
+   * Do not generate `external_id` dynamically (e.g., `guest_${Date.now()}`) or make up any user fields.
+   * Only pull values from your authenticated user record in the database. If unavailable, use `null`.
+
+3. **Respect your logging/history mechanism.**
+
+   * If your project has a logging or history system enabled, you must fetch all `guestInfo` values directly from the canonical user store (`users` table).
+   * If there is no logging/history mechanism or you cannot securely identify the user, you must leave those fields as `null`.
+
+4. **Enforce authentication when you rely on history.**
+
+   * Any feature that uses conversation history must require that the user is authenticated so `guestInfo.external_id` is valid and consistent.
+
+5. **Validate before use.**
+
+   * Before passing `external_id` into the SDK, verify it exists in the `users` table. If the required `users` table is missing, trigger your orchestration logic to create it. Do not proceed assuming history will work without that validation.
+
+### When to Populate `guestInfo`
+
+* Populate it with real values only when:
+
+  * You have a valid authenticated session tied to a user record, and
+  * The required user data exists in the `users` table (logging/history is available).
+
+* Otherwise, set each field to `null`. Do not guess or backfill with placeholder data.
+
+### Correct Usage Example
 
 ```jsx
-const user = useAuth();
-...
+const user = await fetchCurrentUserFromDB(); // must come from your users table
+
+<Room
+  mode="agent"
+  accountId={resolveAccountId()}    // loaded dynamically
+  agentId={resolveAgentId()}        // loaded dynamically
+  guestInfo={{
+    first_name: user?.first_name || null,
+    last_name: user?.last_name || null,
+    email: user?.email || null,
+    external_id: user?.id || null, // MUST be an existing user ID
+  }}
+/>
+```
+
+### Incorrect / Forbidden Examples
+
+```jsx
 guestInfo={{
-  first_name: user?.first_name || null,    // Your user ID (enables conversation history)
-  last_name: user?.last_name || null,    // User's first name
-  email: user?.email || null,   // User's last name  
-  external_id: user?.id || null   // User's email
+  first_name: "Guest",                    // ❌ hardcoded
+  external_id: `guest_${Date.now()}`,     // ❌ invented
+  email: "someone@example.com",           // ❌ hardcoded
+  last_name: "User"                       // ❌ hardcoded
 }}
 ```
 
-> **MUST RULE:** Any feature that relies on history **must** be protected by authentication. If you require chat history, enforce login so `guestInfo.external_id` reliably identifies the user.
-
-> **MUST RULE:** `guestInfo` parameters must be fetch dynamically from the Database.
+```jsx
+guestInfo={{
+  external_id: "nonexistent-id",          // ❌ not verified against users table
+}}
+```
 
 ## Customization
 

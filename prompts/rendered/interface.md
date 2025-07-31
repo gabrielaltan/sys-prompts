@@ -230,6 +230,8 @@ The **Retrieval-Augmented Generation (RAG)** tool enables agents to fetch precis
 > **Mandate:** The `rag` action is *mandatory* for any knowledge retrieval. Only bypass it when the information is both verified and within your current context.
 > **Consequence:** Skipping `rag` can lead to outdated answers, broken workflows, or compliance violations.
 
+**FOR EVERY TASK YOU MUST CHECK WHICH VALUES THE PARAMATER `knowledge` TAKES. IF ANY OF THE VALUES IS ASSOCIATED WITH THE TASK. ALWAYS USE THE ACTION `rag`, WHEN IN DOUBT, FAVOR USING THE ACTION.**
+
 
 ## Agent Reference Rule
 
