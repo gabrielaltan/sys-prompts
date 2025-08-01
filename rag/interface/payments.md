@@ -3,7 +3,7 @@
 
 **USE THE EXACT ENDPOINT AND HEADERS SPECIFIED BELOW WITHOUT MODIFICATION**
 
-- **Endpoint**: `POST https://pay.altan.ai/v2/connect/checkout/{account_id}/create_checkout_session?stripe_connect_id={stripe_connect_id}`
+- **Endpoint**: `POST https://pay.altan.ai/v2/connect/checkout/{account_id}/{template_id}/create_checkout_session?stripe_connect_id={stripe_connect_id}`
 
 **If `stripe_connect_id` is not present in the message trail, ask Altan Pay to provide the ID!**
 
@@ -34,7 +34,7 @@
 - Implement webhook handling for payment confirmation
 
 **Critical Implementation Rules**:
-1. **URL Substitution**: Replace `{account_id}` and `{stripe_connect_id}` with actual values
+1. **URL Substitution**: Replace `{account_id}`, `{template_id}` and `{stripe_connect_id}` with actual values
 2. **Mode Selection**: Use "payment" for one-time, "subscription" for recurring
 3. **Line Items**: Include actual cart items with correct price IDs and quantities
 4. **URL Configuration**: Set appropriate success/cancel URLs for your application
