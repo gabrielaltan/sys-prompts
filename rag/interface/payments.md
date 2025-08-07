@@ -1,25 +1,29 @@
-# Payment Integration
-**ALWAYS use Altan's payment API for Stripe Connect integration**
+## Stripe Connect Checkout via Altan Pay
 
-**USE THE EXACT ENDPOINT AND HEADERS SPECIFIED BELOW WITHOUT MODIFICATION**
+> **⚠️ Always use Altan’s Payment API (no substitutions or extra headers).**
 
-- **Endpoint**: `POST https://pay.altan.ai/v2/connect/checkout/{account_id}/create_checkout_session?stripe_connect_id={stripe_connect_id}`
+### 1. Endpoint & Headers
 
-**If `stripe_connect_id` is not present in the message trail, ask Altan Pay to provide the ID!**
+```http
+POST https://pay.altan.ai/v2/connect/checkout/{account_id}/create_checkout_session?stripe_connect_id={stripe_connect_id}
+Content-Type: application/json
+```
 
-- **Headers**: `{"Content-Type": "application/json"}`
+* **Do not** include any API key in the headers for this endpoint.
+* If you don’t yet have `stripe_connect_id`, **prompt Altan Pay** to provide it before proceeding.
 
-**NO API KEYS NEEDED FOR THIS END POINT IN THE HEADER**
+---
 
-- **Request Body**:
+### 2. Request Body
+
 ```json
 {
   "payload": {
     "success_url": "https://your.app.com/success/",
-    "cancel_url": "https://your.app.com/cancel/",
+    "cancel_url":  "https://your.app.com/cancel/",
     "line_items": [
       {
-        "price": "price_ABC123",
+        "price":    "price_ABC123",
         "quantity": 1
       }
     ],
@@ -28,14 +32,38 @@
 }
 ```
 
-**Response Handling**:
-- Extract checkout URL from response: `{ "url": "https://checkout.stripe.com/pay/..." }`
-- Redirect user to Stripe Checkout securely
-- Implement webhook handling for payment confirmation
+* **success\_url / cancel\_url**
+  Set to your application’s endpoints to handle post-checkout flow.
+* **line\_items**
+  List each cart item with its Stripe price ID and desired quantity.
+* **mode**
 
-**Critical Implementation Rules**:
-1. **URL Substitution**: Replace `{account_id}` and `{stripe_connect_id}` with actual values
-2. **Mode Selection**: Use "payment" for one-time, "subscription" for recurring
-3. **Line Items**: Include actual cart items with correct price IDs and quantities
-4. **URL Configuration**: Set appropriate success/cancel URLs for your application
-5. **Error Handling**: Implement proper error handling for failed API calls
+  * `"payment"` = one-time purchase
+  * `"subscription"` = recurring billing
+
+---
+
+### 3. Handling the Response
+
+1. **Parse** the JSON response:
+
+   ```json
+   { "url": "https://checkout.stripe.com/pay/..." }
+   ```
+2. **Redirect** your user’s browser to the returned `url`.
+3. **Implement** a webhook listener on your server to confirm payment events.
+
+---
+
+### 4. Critical Implementation Rules
+
+1. **URL Substitution**
+   Replace `{account_id}` and `{stripe_connect_id}` with the real values before calling.
+2. **Mode Selection**
+   Choose `"payment"` for one-time charges or `"subscription"` for recurring.
+3. **Accurate Line Items**
+   Ensure each item’s `price` ID and `quantity` reflect the actual cart.
+4. **URL Configuration**
+   Use your own application URLs for success and cancellation.
+5. **Error Handling**
+   Gracefully handle HTTP failures and malformed responses (e.g., retry, log, alert).

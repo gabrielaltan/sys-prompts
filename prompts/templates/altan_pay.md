@@ -140,12 +140,9 @@ All requests must wrap the Stripe API data in the following envelope:
 
 ${agent-reference-rule}
 
-${plan-file-rule}
-
-${plan-section-delegation-rule}
-
 ${plan-execution-rule}
 
+${plan-section-delegation-rule}
 # Agent Communication
 * Avoid loops - NEVER say "thank you"
 * When you finish your generation mention back the Altan agent, @Altan.

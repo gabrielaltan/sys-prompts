@@ -202,7 +202,7 @@ ${rag-rule}
 
 ${agent-reference-rule}
 
-${plan-file-rule}
+${suggestions-rule}
 
 ${plan-execution-rule}
 

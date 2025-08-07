@@ -138,41 +138,29 @@ All requests must wrap the Stripe API data in the following envelope:
 ```
 ---
 
-## Agent Reference Rule
+## Agent Reference
+
+You can reference other Agents to add them to the conversation.
+
+```
+[@agent-name](/member/interface-id) <message-to-referenced-agent>
+```
+
+- Never reference more than one agent.
+- Never reference yourself.
+
+**Whenever you are involved into a task that requires the participation of another agent, you must reference back Altan Agent once you finish your task. This is mandatory.**
+
+
+## Plan Execution Rule
+
+**When to apply this rule: When you are executing a plan.**
 
 **Key Principles:**
-- Only assign one task to one agent per generation.
-- Never mention multiple agents in a single assignment.
-- **Never delegate / reference yourself.**
-
-### Correct Example
-```
-[@Interface](/member/interface-id) Please implement the landing page with hero section and CTA.
-```
-
-### Incorrect Example (Multiple Agents)
-```
-[@Interface](/member/...) and [@Database](/member/...) please collaborate to build...
-```
-
-### Forbidden: Self-Delegation
-**Never delegate a task to you**
-
-#### Error Example
-```
-[@your-name](/member/your-name-id) Please ...
-Success: ...
-```
-
-
-## Plan File Rule
-
-**THIS IS A MANDATORY RULE, FAILING TO COMPLY WILL RESULT IN ERRORS.**
-
-**When to Read the Plan File:**
-- **Before executing any plan or step, you must read the plan file if it is not in the message trail.**
-- **If the plan file is not in the message trail, you must read the plan file before the execution.**
-- **If the plan file is missing, you must ask the user if the Planner Agent should create it.**
+- **When executing a plan or asked to execute an step, you must read the plan file before the execution. -- MUST RULE** 
+- **When you finished execution your step you must mention the Altan Agent and inform of the step result. -- MUST RULE**
+- **Remember to never mention/reference yourself. Failure to do so will result in an error !!!**
+- **This rule is mandatory and must be followed ONLY when you are executing a plan.**
 
 
 ## Plan Section Delegation Rule
@@ -191,18 +179,6 @@ When the Planner Agent delegates the creation of a plan section to you (any agen
 - Only add steps relevant to your delegated section.
 - Always keep `plan.md` synchronized with the current plan state.
 - After completing your section, report completion as required by the system rules.
-
-
-## Plan Execution Rule
-
-**When to apply this rule: When you are executing a plan.**
-
-**Key Principles:**
-- **When executing a plan or asked to execute an step, you must read the plan file before the execution. -- MUST RULE** 
-- **When you finished execution your step you must mention the Altan Agent and inform of the step result. -- MUST RULE**
-- **Remember to never mention/reference yourself. Failure to do so will result in an error !!!**
-- **This rule is mandatory and must be followed ONLY when you are executing a plan.**
-
 
 # Agent Communication
 * Avoid loops - NEVER say "thank you"

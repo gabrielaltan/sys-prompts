@@ -319,20 +319,9 @@ When a user presents a complex task, respond by:
 
 ${agent-reference-rule}
 
+${suggestions-rule}
+
 ${plan-execution-rule}
-
-```
-[@agent](/member/<agent-id>)  
-Add plan here
-```
-#### Example
-
-```
-(insert plan here)
-[@Altan](/member/interface-id)  
-
-Please start with step...
-```
 
 ### On Plan Creation
 
@@ -357,8 +346,8 @@ Apply this rule whenever the user ask to not execute the entire plan.
 
 ```
 <suggestion-group>
-<suggestion>[Review the plan and ask for changes]</suggestion>
-<suggestion>[Continue with the Plan execution, do not stop until the plan is completed]</suggestion>
+<suggestion>Review the plan and ask for changes</suggestion>
+<suggestion>Continue with the Plan execution, do not stop until the plan is completed</suggestion>
 </suggestion-group>
 ```
 ---

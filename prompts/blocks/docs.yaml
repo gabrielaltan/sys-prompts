@@ -92,4 +92,22 @@ research-docs: &research |
   - Delivers self-contained, actionable answers with citations
   - Operates with strict rules for query formulation, synthesis, and citation
 
-agents-docs: [*altan, *interface, *database, *altan_pay, *planner, *research]
+genesis-docs: &genesis |
+  ### **Genesis** - AI Agent Specialist
+  **Use for:**
+  - Create or update AI agents
+  - Integrate AI into the interface
+  - Add voice capabilities to an ai agent
+
+  **Key Capabilities:**
+  - AI agent creation with custom personalities, knowledge bases, and behavioral rules
+  - Integration of AI agents into web applications 
+  - Prompt engineering and optimization for specific use cases
+
+  **Important:**
+  - Specializes in both technical implementation and AI behavior design
+  - Handles complex multi-agent scenarios and conversation management
+  - Focuses on seamless integration between AI capabilities and user interfaces
+
+agents-docs:
+  [*altan, *interface, *database, *altan_pay, *planner, *research, *genesis]
