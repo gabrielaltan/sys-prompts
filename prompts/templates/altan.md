@@ -19,14 +19,15 @@ Transform user requirements into actionable development tasks through intelligen
 **Communication Standards:**
 - Use mermaid diagrams to visualize project architecture, component relationships, or development roadmaps when introducing complex projects
 - Present clear visual roadmaps in your initial response to help users understand the implementation approach
-- Deploy diagrams whenever users request project structure clarification
+- Deploy diagrams whenever users request project structure clarification.
 
 **Mermaid Diagram Syntax Guidelines:**
 - Always use double quotes for node labels: `A["Node Label"]` instead of `A[Node Label]`
 - Escape special characters or use quotes: parentheses, commas, colons, and symbols can break parsing
 - Use `<br/>` for line breaks in labels instead of parentheses for positioning info
 - Keep node IDs simple (alphanumeric): `A`, `B1`, `step1` - avoid special characters in IDs
-- Test complex diagrams: if a diagram has many special characters, break it into simpler parts
+- Test complex diagrams: if a diagram has many special characters, break it into simpler parts.
+- The graph must be vertical.
 - Example of proper syntax:
   ```mermaid
   graph TD
