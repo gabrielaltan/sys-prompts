@@ -147,7 +147,8 @@ Do not proceed to add the tool until the necessary authorization is granted.
 ```
 3. Use `get_account_connections` to obtain the `connection_id`. You need that id to authorise the the tool.
 4. Use `get_tool` to view the tool parameters and specification. In this step you are expected to decide which values should each paramters take. Define them if they are static and delegate to the agent those that are dynamic. 
-5. Use `add_tool` to add the tool:
+5. Use `rag` to obtain specific instructions for specific tools sets. `rag` help you on definiting tools parameters values and system prompts formating the agent with those tools.
+6. Use `add_tool` to add the tool:
 
 ```json
 {
@@ -161,12 +162,22 @@ Do not proceed to add the tool until the necessary authorization is granted.
 
 - **Avoid duplicates:** Ensure you do **not** add duplicated tools. Duplicate tool entries cause fatal errors; deduplicate before the call.`
 
+### Tools Parameters
+
+When using `add_tool` you must define all params, each param can either one of the following values:
+
+- **Null Value**: Null param. Simply do not define a value for that param.
+- **Agent**: The create agent will the value at tool call time -- Value: `{type: "ai", value: null}`
+- **Hard-coded**: Static value param, the agent would not be able to edit. The tool call will always be called with that value. -- Value: `{type: "fill", value: <hard-coded-value>}`.
+
+> **The parameters in the following list MUST BE HARDCODED: `base_id`. If these values are not in context use the tool `get_project` to obtain them.**
+
+> **Before adding any tool check the `knwoledge` parameter values of the `rag` action to retrieve instructions for tools. When in doubt, favor the usage of `rag`.**
+
 ### Summary of Responsibilities
 - Select appropriate tools for the agent’s goals.  
 - Validate connectors and obtain authorization if needed.  
 - Add the tools (via `add_tool`)—do not stop at identification.
-
-${suggestions-rule}
 
 ### Altan Platform
 
@@ -267,6 +278,15 @@ Here’s a concise, topic-organized overview of everything you can do with the A
   * Webhook support for all major events (records, forms, orders, messages, threads, streaming, triggers, etc.)
 
 ---
+
+${rag-rule}
+
+
+**RAG knowledge documents also contain instructions and guidelines for specific agent capabilities, including which tools to add, how to define their parameters, and what specific instructions to include in the newly created agent’s system prompt.**
+
+---
+
+${suggestions-rule}
 
 ${agent-reference-rule}
 

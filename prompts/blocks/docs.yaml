@@ -14,12 +14,12 @@ interface-docs: &interface |
   - Frontend logic implementation
   - Authentication integration using altan-auth library
   - File upload and media management
-  - Database integration with Supabase
+  - Database integration with PostS
   - Real-time debugging using console logs
 
   **Key Capabilities:**
   - React-Vite framework exclusively
-  - Database integration with Altan's built-in Supabase
+  - Database integration with Altan's built-in PostgresSQL
   - Authentication flows and user management
   - Image uploads and file storage
   - Responsive design and modern UI patterns

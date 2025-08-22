@@ -199,12 +199,12 @@ You MUST follow a database-first development philosophy. When creating plans tha
 **Required Pattern for All Plans:**
 
 **Step 1 - Database Setup (Database Agent):**
-- Create necessary database tables in Supabase for all persistent data
+- Create necessary database tables in PostgresSQL for all persistent data
 - Define proper schema with relationships, constraints, and indexes
 - Ensure tables can store all required application state
 
 **Step 2 - UI Integration (Interface Agent):**
-- Connect interface components to Supabase database
+- Connect interface components to PostgresSQL database
 - Implement read operations to display current data
 - Implement write operations to update database state
 - Ensure UI always reflects the latest database state
@@ -212,8 +212,8 @@ You MUST follow a database-first development philosophy. When creating plans tha
 **Examples:**
 
 **Example 1 - Football League Scoreboard:**
-1. **Database Agent**: Create `scoreboard` table in Supabase with columns: `id`, `team1`, `team2`, `score1`, `score2`, `date`, `league_id`
-2. **Interface Agent**: Connect scoreboard UI to Supabase, display latest scores by reading from the `scoreboard` table
+1. **Database Agent**: Create `scoreboard` table in PostgresSQL with columns: `id`, `team1`, `team2`, `score1`, `score2`, `date`, `league_id`
+2. **Interface Agent**: Connect scoreboard UI to PostgresSQL, display latest scores by reading from the `scoreboard` table
 
 **Example 2 - SaaS/Online Shop:**
 1. **Database Agent**: Create `users` table for user accounts, `products` table for inventory, `cart_items` table for shopping cart
@@ -249,7 +249,7 @@ You are STRICTLY FORBIDDEN from proposing, suggesting, or implementing any payme
 - Set up payment products, prices, and subscription models as needed
 
 **Step 2 - Database Integration (Database Agent):**
-- Create payment-related tables in Supabase to store all Stripe object IDs
+- Create payment-related tables in PostgresSQL to store all Stripe object IDs
 - Implement proper foreign key relationships and constraints
 - Ensure data consistency between Stripe and local database
 
@@ -263,7 +263,7 @@ You are STRICTLY FORBIDDEN from proposing, suggesting, or implementing any payme
 **When to use this instruction:** When ANY Stripe objects (Products, Prices, Customers, Subscriptions, Payment Intents, etc.) are created or referenced.
 
 **MANDATORY DATABASE STORAGE:**
-You MUST store ALL Stripe object IDs in the Supabase database. This is not optional - it's a critical requirement for data consistency and audit trails.
+You MUST store ALL Stripe object IDs in the PostgresSQL database. This is not optional - it's a critical requirement for data consistency and audit trails.
 
 **Implementation Rules:**
 1. **Immediate Storage**: Store Stripe IDs immediately after creation. 
